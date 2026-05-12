@@ -10,7 +10,13 @@ import { COUNTDOUN_UNIT, DEFAULT_LANGUAGE, DEFAULT_ROUND_TIME, DEFAULT_ROUNDS, D
 const app = express()
 app.use(express.json())
 
-app.use(cors({ origin: 'http://localhost:3000' }))
+app.use(cors({ 
+    origin: [
+        'http://localhost:3000',
+        'https://scribbbly-server-ts.up.railway.app'
+    ],
+    credentials: true
+}))
 
 
 
@@ -18,11 +24,15 @@ const server = http.createServer(app)
 
 const io = new Server(server, {
     cors: {
-        origin: 'http://localhost:3000',
+        origin: [
+            'http://localhost:3000',
+            'https://scribbbly-server-ts.up.railway.app'
+        ],
         methods: ['POST', 'GET'],
         credentials: true
     },
     transports: ['polling', 'websocket'],
+
 });
 
 const rooms: Record<string, Room> = {}
