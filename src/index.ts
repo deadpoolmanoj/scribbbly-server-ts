@@ -11,7 +11,7 @@ import { COUNTDOUN_UNIT, DEFAULT_LANGUAGE, DEFAULT_ROUND_TIME, DEFAULT_ROUNDS, D
 const app = express()
 app.use(express.json())
 
-app.use(cors({ origin: ['http://localhost:3000', 'https://scribbbly-ten.vercel.app/'] }))
+app.use(cors({ origin: ['http://localhost:3000', 'https://scribbbly-ten.vercel.app'] }))
 
 
 
@@ -19,7 +19,7 @@ const server = http.createServer(app)
 
 const io = new Server(server, {
     cors: {
-        origin: ['http://localhost:3000', 'https://scribbbly-ten.vercel.app/'],
+        origin: ['http://localhost:3000', 'https://scribbbly-ten.vercel.app'],
         methods: ['POST', 'GET'],
         credentials: true
     },
