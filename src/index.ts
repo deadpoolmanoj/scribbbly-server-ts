@@ -782,7 +782,7 @@ io.on('connection', (socket) => {
 
     if (!room) return
 
-    if (room.currentPhase !== 'waiting') return
+    // if (room.currentPhase !== 'waiting') return
 
     if (room.gameStarted) return
 
