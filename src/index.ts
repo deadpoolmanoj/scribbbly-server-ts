@@ -10,7 +10,10 @@ import { COUNTDOUN_UNIT, DEFAULT_LANGUAGE, DEFAULT_ROUND_TIME, DEFAULT_ROUNDS, D
 const app = express()
 
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: [
+    'http://localhost:3000',
+    'https://your-frontend.vercel.app'
+  ],
   credentials: true
 }))
 
@@ -20,12 +23,14 @@ const server = http.createServer(app)
 
 const io = new Server(server, {
   cors: {
-    origin: 'http://localhost:3000',
+    origin: [
+      'http://localhost:3000',
+      'https://your-frontend.vercel.app'
+    ],
     methods: ['GET', 'POST'],
     credentials: true
   }
 })
-
 
 const rooms: Record<string, Room> = {}
 
@@ -494,6 +499,8 @@ io.on('connection', (socket) => {
 
 })
 
-server.listen(3001, () => {
+const PORT = process.env.PORT || 3001
+
+server.listen(PORT, () => {
   console.log('Server running on port 3001')
 })
