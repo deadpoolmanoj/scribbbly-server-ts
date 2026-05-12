@@ -2,10 +2,10 @@ import express, { Request, Response } from 'express'
 import http from 'http'
 import { Server } from 'socket.io'
 import cors from 'cors'
-import { Room } from '../utils/props/all-props'
+import { Room } from './utils/props/all-props'
 
-import { generateRoomId, getPoints, getRandomBrainrotName, getRandomDrawableWord } from '../utils/helper-functions'
-import { COUNTDOUN_UNIT, DEFAULT_LANGUAGE, DEFAULT_ROUND_TIME, DEFAULT_ROUNDS, DEFAULT_WORD_SELECTION_TIME } from '../utils/const-values'
+import { generateRoomId, getPoints, getRandomBrainrotName, getRandomDrawableWord } from './utils/helper-functions'
+import { COUNTDOUN_UNIT, DEFAULT_LANGUAGE, DEFAULT_ROUND_TIME, DEFAULT_ROUNDS, DEFAULT_WORD_SELECTION_TIME } from './utils/const-values'
 
 const app = express()
 
