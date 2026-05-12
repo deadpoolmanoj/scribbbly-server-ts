@@ -9,20 +9,23 @@ import { COUNTDOUN_UNIT, DEFAULT_LANGUAGE, DEFAULT_ROUND_TIME, DEFAULT_ROUNDS, D
 
 const app = express()
 
-app.use(cors())
+app.use(cors({
+  origin: 'http://localhost:3000',
+  credentials: true
+}))
+
 app.use(express.json())
 
 const server = http.createServer(app)
 
 const io = new Server(server, {
   cors: {
-    origin: [
-      'http://localhost:3000',
-      'https://scribbbly-server-ts.up.railway.app'
-    ],
+    origin: 'http://localhost:3000',
     methods: ['GET', 'POST'],
-  },
+    credentials: true
+  }
 })
+
 
 const rooms: Record<string, Room> = {}
 
