@@ -762,6 +762,8 @@ io.on('connection', (socket) => {
 
       if (!room) return
 
+       if (room.currentPhase !== 'selection') return
+
       room.currentWord = selectedWord
 
       room.currentPhase = 'drawing'
@@ -774,9 +776,13 @@ io.on('connection', (socket) => {
 
   socket.on('round-start', ({ roomId }) => {
 
+  
+
     const room = rooms[roomId]
 
     if (!room) return
+
+    if (room.currentPhase !== 'waiting') return
 
     if (room.gameStarted) return
 
@@ -811,7 +817,7 @@ io.on('connection', (socket) => {
 
   function wordSelectionCountDown(room: Room) {
 
-    clearRoomIntervals(room.id)
+    if (roomIntervals[room.id]?.selection) return
 
     roomIntervals[room.id] = {}
 
@@ -849,9 +855,7 @@ io.on('connection', (socket) => {
 
   function drawingCountDown(room: Room) {
 
-    if (roomIntervals[room.id].drawing) {
-      clearInterval(roomIntervals[room.id].drawing)
-    }
+    if (roomIntervals[room.id]?.drawing) return
 
     roomIntervals[room.id].drawing = setInterval(() => {
 
@@ -875,9 +879,7 @@ io.on('connection', (socket) => {
 
   function showPointsBoard(room: Room) {
 
-    if (roomIntervals[room.id].points) {
-      clearInterval(roomIntervals[room.id].points)
-    }
+     if (roomIntervals[room.id]?.points) return
 
     roomIntervals[room.id].points = setInterval(() => {
 
