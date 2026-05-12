@@ -23,7 +23,7 @@ const io = new Server(server, {
         methods: ['POST', 'GET'],
         credentials: true
     },
-    transports: ['polling', 'websocket'],
+    transports: ['websocket'],
 });
 
 const rooms: Record<string, Room> = {}
