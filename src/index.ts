@@ -21,6 +21,7 @@ const io = new Server(server, {
       'https://scribbbly-server-ts.up.railway.app'
     ],
     methods: ['GET', 'POST'],
+    credentials: true
   },
 })
 
@@ -92,6 +93,11 @@ const reverseSettingKeyMap = {
   maxPlayersCount: 'MAX PLAYERS',
   drawTime: 'DRAW TIME'
 } as const
+
+app.get('/', (req: Request, res: Response) => {
+  res.send('Scribbbly Server is running')
+})
+
 
 io.on('connection', (socket) => {
   console.log('User connected', socket.id)
