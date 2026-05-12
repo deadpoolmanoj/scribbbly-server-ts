@@ -8,30 +8,22 @@ import { generateRoomId, getPoints, getRandomBrainrotName, getRandomDrawableWord
 import { COUNTDOUN_UNIT, DEFAULT_LANGUAGE, DEFAULT_ROUND_TIME, DEFAULT_ROUNDS, DEFAULT_WORD_SELECTION_TIME } from './utils/const-values'
 
 const app = express()
-
-app.use(cors({
-  origin: [
-    'http://localhost:3000',
-    'https://your-frontend.vercel.app'
-  ],
-  credentials: true
-}))
-
 app.use(express.json())
+
+app.use(cors({ origin: 'http://localhost:3000' }))
+
+
 
 const server = http.createServer(app)
 
 const io = new Server(server, {
-  cors: {
-    origin: [
-      'http://localhost:3000',
-      'https://your-frontend.vercel.app'
-    ],
-    methods: ['GET', 'POST'],
-    credentials: true
-  },
-  transports: ['websocket', 'polling']
-})
+    cors: {
+        origin: 'http://localhost:3000',
+        methods: ['POST', 'GET'],
+        credentials: true
+    },
+    transports: ['polling', 'websocket'],
+});
 
 const rooms: Record<string, Room> = {}
 
